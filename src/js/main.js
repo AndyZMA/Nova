@@ -1,4 +1,46 @@
 
+const burger = document.getElementById("burgerBtn");
+const menu = document.getElementById("mobileMenu");
+
+burger.addEventListener("click", () => {
+  burger.classList.toggle("active");
+  menu.classList.toggle("active");
+});
+
+/* Cerrar al hacer click en un link */
+menu.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    burger.classList.remove("active");
+    menu.classList.remove("active");
+  });
+});
+
+let lastScroll = 0;
+const header = document.querySelector(".site-header");
+
+window.addEventListener("scroll", () => {
+  const currentScroll = window.scrollY;
+
+  if (currentScroll <= 0) {
+    header.classList.remove("hide");
+    return;
+  }
+
+  if (currentScroll > lastScroll && !header.classList.contains("hide")) {
+    // scroll hacia abajo
+    header.classList.add("hide");
+  } else if (
+    currentScroll < lastScroll &&
+    header.classList.contains("hide")
+  ) {
+    // scroll hacia arriba
+    header.classList.remove("hide");
+  }
+
+  lastScroll = currentScroll;
+});
+
+
   gsap.registerPlugin();
 
   const heroTl = gsap.timeline({

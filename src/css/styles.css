@@ -16,6 +16,242 @@ html, body {
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 }
 
+
+/* =========================
+   DESKTOP NAV
+========================= */
+
+.desktop-nav {
+  display: flex;
+}
+
+.desktop-nav ul {
+  display: flex;
+  gap: 2.4rem;
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.desktop-nav a {
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  color: var(--text);
+  position: relative;
+
+  transition: color .25s ease;
+}
+
+.desktop-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+
+  width: 0%;
+  height: 1px;
+  background: var(--gold);
+
+  transition: width .3s ease;
+}
+
+.desktop-nav a:hover {
+  color: var(--gold);
+}
+
+.desktop-nav a:hover::after {
+  width: 100%;
+}
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  transition: transform .4s cubic-bezier(.22,1,.36,1);
+}
+
+.site-header.hide {
+  transform: translateY(-100%);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .desktop-nav {
+    display: none;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 901px) {
+  .burger {
+    display: none;
+  }
+}
+
+
+
+/* =========================
+   HEADER / BURGER MENU
+========================= */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  transition: transform .4s cubic-bezier(.22,1,.36,1);
+}
+
+/* Header hide on scroll */
+.site-header.hide {
+  transform: translateY(-100%);
+}
+
+/* Header inner */
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem 6vw;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Logo */
+
+.logo {
+  font-size: 13px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+/* =========================
+   BURGER BUTTON
+========================= */
+
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+
+  background: none;
+  border: none;
+  padding: 0;
+
+  cursor: pointer;
+  z-index: 1100; /* 🔥 siempre encima */
+}
+
+.burger span {
+  width: 26px;
+  height: 2px;
+  background: var(--text);
+
+  transition:
+    transform .35s cubic-bezier(.22,1,.36,1),
+    opacity .25s ease;
+}
+
+/* Burger active animation */
+
+.burger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.burger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* =========================
+   MOBILE MENU OVERLAY
+========================= */
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity .4s ease;
+  z-index: 900;
+}
+
+/* Active state */
+
+.mobile-menu.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Menu list */
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.mobile-menu li {
+  margin: 1.75rem 0;
+}
+
+/* Menu links */
+
+.mobile-menu a {
+  font-size: 20px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  color: var(--text);
+  transition: color .25s ease;
+}
+
+.mobile-menu a:hover {
+  color: var(--gold);
+}
+
+/* =========================
+   ONLY MOBILE
+========================= */
+
+@media (max-width: 900px) {
+  .burger {
+    display: flex;
+  }
+}
+
+
+
 /* HERO */
 .hero {
   min-height: 100vh;
@@ -51,7 +287,7 @@ html, body {
 .hero-kicker {
   display: inline-block;
   margin-bottom: 1rem;
-  font-size: 12px;
+  font-size: 16px;
   letter-spacing: .24em;
   text-transform: uppercase;
   color: var(--muted);
@@ -69,7 +305,7 @@ html, body {
 .hero-text p {
   max-width: 46ch;
   margin-bottom: 2rem;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.65;
   color: var(--muted);
 }
@@ -228,14 +464,14 @@ html, body {
 }
 
 .about-intro {
-  font-size: 14.5px;
+  font-size: 16.5px;
   line-height: 1.7;
   color: var(--muted);
   margin-bottom: 1.5rem;
 }
 
 .about-body {
-  font-size: 14.5px;
+  font-size: 16.5px;
   line-height: 1.7;
   color: var(--muted);
   margin-bottom: 2.5rem;
