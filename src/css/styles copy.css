@@ -731,63 +731,10 @@ html, body {
 ========================= */
 
 .modalidades-scroll {
-  background: radial-gradient(
-    1200px 800px at 20% 50%,
-    #0f1733 0%,
-    #070b17 55%,
-    #000 100%
-  );
+  background: #000;
   padding: 10rem 0;
   overflow: hidden;
 }
-
-.modalidades-title{
-    background:
-    radial-gradient(
-      800px 300px at 50% 40%,
-      rgba(201, 162, 77, 0.12),
-      rgba(201, 162, 77, 0.04),
-      transparent 70%
-    ),
-    radial-gradient(
-      1200px 800px at 20% 50%,
-      #0f1733 0%,
-      #070b17 55%,
-      #000 100%
-    );
-
-}
-
-/* TÍTULO */
-
-.modalidades-title h2 {
-  margin: 0;
-  font-size: clamp(26px, 3vw, 34px);
-  letter-spacing: .32em;
-  text-transform: uppercase;
-  font-weight: 600;
-
-  color: #fff;
-  position: relative;
-  z-index: 1;
-}
-
-.modalidades-title h2::after {
-  content: "";
-  display: block;
-  width: 80px;
-  height: 1px;
-  margin: 1.25rem auto 0;
-
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(201, 162, 77, 0.85),
-    transparent
-  );
-}
-
-  
 
 .modalidades-track {
   max-width: 1400px;
@@ -991,7 +938,7 @@ html, body {
 
 .cursos {
   padding: 10rem 0;
-  background: radial-gradient( 1200px 800px at 20% 50%, #0f1733 0%, #070b17 55%, #000 100% );
+  background: #000;
 }
 
 .cursos-header {
