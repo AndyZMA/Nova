@@ -512,7 +512,7 @@ html, body {
 
 .about {
   padding: 8rem 0;
-  background: #000;
+  background: radial-gradient( 1200px 800px at 20% 50%, #0f1733 0%, #070b17 55%, #000 100% );
 }
 
 .about-container {
@@ -1395,9 +1395,10 @@ html, body {
 ========================= */
 
 .site-footer {
-  background: #000;
+  background: radial-gradient( 1200px 800px at 20% 50%, #0f1733 0%, #070b17 55%, #000 100% );
   border-top: 1px solid rgba(201,162,77,.15);
   padding: 5rem 0 2.5rem;
+
 }
 
 .footer-container {
