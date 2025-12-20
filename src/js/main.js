@@ -124,3 +124,17 @@
       ease: "power2.out"
     });
   });
+
+
+  const track = document.querySelector('.cursos-track');
+document.querySelector('.next').onclick = () => {
+  track.scrollBy({ left: 320, behavior: 'smooth' });
+};
+document.querySelector('.prev').onclick = () => {
+  track.scrollBy({ left: -320, behavior: 'smooth' });
+};
+
+container.scrollBy({
+  left: cardWidth,
+  behavior: 'smooth'
+});
