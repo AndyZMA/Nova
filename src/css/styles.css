@@ -530,19 +530,26 @@ html, body {
 
 .about-visual {
   position: relative;
-  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* IMAGEN DESKTOP */
+
 .about-visual img {
-  width: 160%;
-  max-width: 520px;
+  width: 180%;
+  max-width: 620px;
   display: block;
-  margin-left: -35%;
+
+  margin-left: -15%; /* más centrada que antes */
+  
   filter: contrast(1.05) saturate(1.05);
-  position: sticky;
-  top: 10vh;
-   transform: translate3d(0,0,0);
-  will-change: transform;
+
+  position: relative; /* ❌ ya no sticky */
+  top: auto;
+  transform: none;
+  will-change: auto;
 }
 
 /* TEXTO */
@@ -702,8 +709,14 @@ html, body {
     gap: 3.5rem;
   }
 
+  .about-visual {
+    justify-content: center;
+  }
+
   .about-visual img {
-    max-width: 360px;
+    width: 100%;
+    max-width: 420px;
+    margin-left: 0; /* 🔥 centra bien en mobile */
   }
 
   .about-content {
