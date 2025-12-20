@@ -107,4 +107,20 @@
     });
   });
 
+/*MOADALIDADES */
+ gsap.registerPlugin(ScrollTrigger);
 
+  gsap.utils.toArray(".modalidad-item").forEach((item) => {
+    const direction = item.classList.contains("left") ? -40 : 40;
+
+    gsap.from(item.querySelector(".modalidad-content"), {
+      scrollTrigger: {
+        trigger: item,
+        start: "top 75%",
+      },
+      opacity: 0,
+      x: direction,
+      duration: 0.9,
+      ease: "power2.out"
+    });
+  });
