@@ -125,16 +125,25 @@
     });
   });
 
+const track = document.querySelector('.cursos-grid');
+const cards = document.querySelectorAll('.curso-card');
 
-  const track = document.querySelector('.cursos-track');
-document.querySelector('.next').onclick = () => {
-  track.scrollBy({ left: 320, behavior: 'smooth' });
-};
-document.querySelector('.prev').onclick = () => {
-  track.scrollBy({ left: -320, behavior: 'smooth' });
-};
+let index = 0;
 
-container.scrollBy({
-  left: cardWidth,
-  behavior: 'smooth'
+function scrollToCard(i) {
+  cards[i].scrollIntoView({
+    behavior: 'smooth',
+    inline: 'center'
+  });
+}
+
+document.querySelector('.next').addEventListener('click', () => {
+  index = Math.min(index + 1, cards.length - 1);
+  scrollToCard(index);
 });
+
+document.querySelector('.prev').addEventListener('click', () => {
+  index = Math.max(index - 1, 0);
+  scrollToCard(index);
+});
+

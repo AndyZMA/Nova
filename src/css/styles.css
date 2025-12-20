@@ -514,7 +514,6 @@ html, body {
 
   .modalidad-item {
     grid-template-columns: 1fr;
-    min-height: auto;
   }
 
   .modalidad-content {
@@ -522,13 +521,18 @@ html, body {
   }
 
   .modalidad-content img {
-    position: relative;
-    inset: auto;
+    position: static;        /* 🔥 no relative */
     transform: none;
     width: 100%;
-    margin-top: 2rem;
+    max-width: 100%;
+    height: auto;
+
+    display: block;
+    margin: 2.5rem auto 0;  /* espacio natural */
+    opacity: 1;
   }
 }
+
 
 /* =========================
    NOVA TRANSITION
@@ -739,7 +743,7 @@ html, body {
     gap: 1.5rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding-bottom: 1rem;
+    padding: 0 9vw;
   }
 
   .cursos-grid::-webkit-scrollbar {
@@ -747,8 +751,8 @@ html, body {
   }
 
   .curso-card {
-    min-width: 82vw;
-    max-width: 82vw;
+    min-width: calc(100vw - 18vw); /* 100 - (padding*2) */
+    max-width: calc(100vw - 18vw);
     flex-shrink: 0;
 
     scroll-snap-align: center;
