@@ -358,6 +358,28 @@ html, body {
   filter: saturate(1.15);
 }
 
+/* MOBILE */
+
+@media (max-width: 900px) {
+  .about {
+    padding: 6rem 0;
+  }
+
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+
+  .about-visual img {
+    max-width: 360px;
+  }
+
+  .about-content {
+    max-width: none;
+  }
+}
+
+
 
 /* =========================
    MODALIDADES SCROLL
@@ -366,16 +388,17 @@ html, body {
 .modalidades-scroll {
   background: #000;
   padding: 10rem 0;
+  overflow: hidden;
 }
 
 .modalidades-track {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 6vw;
 
   display: flex;
   flex-direction: column;
-  gap: 10rem;
+  gap: 12rem;
 }
 
 /* ITEM */
@@ -383,6 +406,16 @@ html, body {
 .modalidad-item {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+  min-height: 420px;
+}
+
+/* TEXTO */
+
+.modalidad-content {
+  position: relative;
+  max-width: 460px;
+  z-index: 2;
 }
 
 .modalidad-item.left .modalidad-content {
@@ -390,14 +423,10 @@ html, body {
 }
 
 .modalidad-item.right .modalidad-content {
-  grid-column: 8 / span 5;
+  grid-column: 7 / span 5; /* FIX: antes era 8 */
 }
 
-/* CONTENIDO */
-
-.modalidad-content {
-  max-width: 420px;
-}
+/* TEXTO */
 
 .modalidad-content h3 {
   margin: 0 0 1rem;
@@ -435,6 +464,27 @@ html, body {
   color: #c9a24d;
 }
 
+/* IMAGEN */
+
+.modalidad-content img {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(320px, 40vw, 620px);
+  opacity: .95;
+  pointer-events: none;
+}
+
+/* Imagen derecha */
+.modalidad-item.left .modalidad-content img {
+  left: 110%;
+}
+
+/* Imagen izquierda */
+.modalidad-item.right .modalidad-content img {
+  right: 110%;
+}
+
 /* MOBILE */
 
 @media (max-width: 900px) {
@@ -444,49 +494,23 @@ html, body {
 
   .modalidad-item {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
-  .modalidad-item.left .modalidad-content,
-  .modalidad-item.right .modalidad-content {
-    grid-column: auto;
-  }
-}
-
-
-.presencialIMG{
-    width: 600px;
-    margin-left: 600px;
-    position: relative; 
-    top: -250px; /* Ajusta este valor negativo para que suba */
-}
-
-.lineaIMG{
-    width: 600px;
-    margin-left: 600px;
-    position: relative; 
-    top: -250px; /* Ajusta este valor negativo para que suba */
-}
-
-
-
-/* MOBILE */
-
-@media (max-width: 900px) {
-  .about {
-    padding: 6rem 0;
-  }
-
-  .about-container {
-    grid-template-columns: 1fr;
-    gap: 3.5rem;
-  }
-
-  .about-visual img {
-    max-width: 360px;
-  }
-
-  .about-content {
+  .modalidad-content {
     max-width: none;
   }
+
+  .modalidad-content img {
+    position: relative;
+    inset: auto;
+    transform: none;
+    width: 100%;
+    margin-top: 2rem;
+  }
 }
+
+
+
+
 
