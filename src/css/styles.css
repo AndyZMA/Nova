@@ -163,6 +163,38 @@ html, body {
     max-width: none;
   }
 }
+.hero-text > * {
+  will-change: transform, opacity;
+}
+
+.hero-visual img {
+  will-change: transform;
+}
+
+
+.hero-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(201,162,77,.25),
+    transparent
+  );
+  transform: translateX(-120%);
+  transition: transform .6s ease;
+}
+
+.hero-cta:hover::after {
+  transform: translateX(120%);
+}
+
 
 /* =========================
    ABOUT / CONÓCENOS
@@ -288,6 +320,60 @@ html, body {
   border-color: rgba(255,255,255,.4);
   transform: translateY(-1px);
 }
+
+
+:root {
+  --gold: #c9a24d;
+}
+
+/* TAB HOVER + ACTIVE */
+
+.about-tabs .tab {
+  position: relative;
+  transition: color .25s ease;
+}
+
+.about-tabs .tab:hover {
+  color: var(--gold);
+}
+
+.about-tabs .tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  transition: width .25s ease;
+}
+
+.about-tabs .tab:hover::after,
+.about-tabs .tab.active::after {
+  width: 100%;
+}
+
+/* TEXTO DINÁMICO */
+
+.about-dynamic-text {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 48ch;
+  margin-bottom: 2.5rem;
+}
+
+/* IMAGEN ABOUT */
+
+.about-visual img {
+  transition: transform .8s ease, filter .8s ease;
+}
+
+.about-visual img:hover {
+  transform: scale(1.02);
+  filter: saturate(1.15);
+}
+
 
 /* MOBILE */
 

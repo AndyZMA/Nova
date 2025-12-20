@@ -17,22 +17,17 @@
 
     <div class="hero-content">
       <div class="hero-text">
-        <span class="hero-kicker">Nova Aethereum</span>
+  <span class="hero-kicker">Nova Aethereum</span>
+  <h1 class="hero-title">UN NUEVO ESPACIO PARA<br>APRENDER</h1>
+  <p class="hero-sub">
+    En Nova Aethereum impulsamos una educación interdisciplinaria...
+  </p>
 
-        <h1>
-          UN NUEVO ESPACIO<br>
-          PARA APRENDER
-        </h1>
+  <a href="#conocenos" class="hero-cta">
+    CONÓCENOS <span>→</span>
+  </a>
+</div>
 
-        <p>
-          En Nova Aethereum impulsamos una educación interdisciplinaria que desarrolla pensamiento crítico, cultura y crecimiento académico y personal.
-        </p>
-
-        <a href="#conocenos" class="hero-cta">
-          CONÓCENOS
-          <span>→</span>
-        </a>
-      </div>
 
       <div class="hero-visual">
         <img src="src/img/g2.jpg" alt="Galaxia Nova Aethereum">
@@ -67,10 +62,19 @@
 
       <!-- Tabs -->
       <div class="about-tabs">
-        <button class="tab active">Significado</button>
-        <button class="tab">Misión</button>
-        <button class="tab">Nuestro aprendizaje</button>
-      </div>
+    <button class="tab active" data-tab="significado">Significado</button>
+    <button class="tab" data-tab="mision">Misión</button>
+    <button class="tab" data-tab="aprendizaje">Nuestro aprendizaje</button>
+    </div>
+
+    <p class="about-dynamic-text" id="aboutText">
+        Nova representa lo nuevo: el nacimiento de una estrella, el inicio de algo distinto.
+        Aethereum remite a lo eterno, al conocimiento que trasciende el tiempo.
+        Nova Aethereum nace de la unión entre lo nuevo y lo perdurable: una academia que se
+        siente ancestral en su respeto por el conocimiento, pero que se manifiesta mediante
+        metodologías, pensamiento y tecnologías contemporáneas.
+    </p>
+
 
       <!-- CTA -->
       <a href="#contacto" class="about-cta">
@@ -80,6 +84,9 @@
 
   </div>
 </section>
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script src="src/js/main.js"></script>
 
 </body>
 </html>
