@@ -375,6 +375,102 @@ html, body {
   pointer-events: none;
 }
 
+/* =========================
+   HERO VIDEO
+========================= */
+
+/* Contenedor del media */
+.hero-visual {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+}
+
+/* Media base (video o imagen) */
+.hero-visual > video,
+.hero-visual > img {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  pointer-events: none;
+}
+
+/* =========================
+   VIDEO ESPECÍFICO
+========================= */
+
+.hero-video {
+  width: 120%;
+  height: 100%;
+  margin-left: -10%;
+
+  filter: 
+    saturate(1.05)
+    contrast(1.05)
+    brightness(0.95);
+
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* =========================
+   OVERLAY / FADE
+========================= */
+
+.hero-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    90deg,
+    rgba(7,11,23,1) 0%,
+    rgba(7,11,23,.8) 22%,
+    rgba(7,11,23,.35) 48%,
+    rgba(7,11,23,0) 72%
+  );
+
+  pointer-events: none;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+  .hero-visual {
+    height: 260px;
+    order: -1;
+  }
+
+  .hero-video {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .hero-visual::after {
+    background: linear-gradient(
+      180deg,
+      rgba(0,0,0,.15) 0%,
+      rgba(0,0,0,.6) 100%
+    );
+  }
+}
+
+/* =========================
+   ACCESIBILIDAD
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    display: none;
+  }
+}
 
 
 /* MOBILE */
@@ -673,7 +769,7 @@ html, body {
 }
 
 .modalidad-content p {
-  font-size: 14.5px;
+  font-size: 17.5px;
   line-height: 1.7;
   color: var(--muted);
   margin-bottom: 1.75rem;
@@ -813,7 +909,7 @@ html, body {
 }
 
 .nova-transition-content p {
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.8;
   color: var(--muted);
   margin-bottom: 1.5rem;
@@ -1034,3 +1130,327 @@ html, body {
   }
 }
 
+/* =========================
+   CONTACTO – NOVA AETHEREUM
+========================= */
+
+.contacto {
+  position: relative;
+  padding: 8rem 6vw;
+  overflow: hidden;
+  background: #000;
+}
+
+/* =========================
+   BACKGROUND IMAGE
+========================= */
+
+.contacto-bg {
+  position: absolute;
+  inset: 0;
+
+  background-image: url("../img/space.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  z-index: 1;
+}
+
+/* =========================
+   MASK + BLUR (CONTROLADO)
+========================= */
+
+.contacto-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.45),
+    rgba(0, 0, 0, 0.65)
+  );
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  z-index: 2;
+}
+
+/* =========================
+   CONTENT WRAPPER
+========================= */
+
+.contacto-content {
+  position: relative;
+  z-index: 3;
+
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* =========================
+   TEXT SIDE
+========================= */
+
+.contacto-text h2 {
+  margin: 0 0 1.5rem;
+  font-size: clamp(24px, 3vw, 32px);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.contacto-text p {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+}
+
+/* =========================
+   WHATSAPP BUTTON
+========================= */
+
+.contacto-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 22px;
+  border: 1px solid rgba(201, 162, 77, 0.6);
+  color: var(--text);
+  text-decoration: none;
+
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  transition:
+    border-color .25s ease,
+    color .25s ease,
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.contacto-cta:hover {
+  border-color: rgba(201, 162, 77, 0.9);
+  color: #c9a24d;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,.4);
+}
+
+/* =========================
+   MAP CARD
+========================= */
+
+.contacto-map {
+  width: 100%;
+  height: 420px;
+
+  border-radius: 22px;
+  overflow: hidden;
+
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(201, 162, 77, 0.35);
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.contacto-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(1) contrast(1.05) brightness(.9);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+  .contacto {
+    padding: 6rem 6vw;
+  }
+
+  .contacto-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .contacto-map {
+    height: 320px;
+  }
+
+  .contacto-overlay {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+  .contacto {
+    padding: 6rem 0;
+  }
+
+  .contacto-container {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .contacto-map iframe {
+    height: 300px;
+  }
+
+  .contacto-orbit {
+    top: -18px;
+    right: -18px;
+    width: 56px;
+    height: 56px;
+  }
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer {
+  background: #000;
+  border-top: 1px solid rgba(201,162,77,.15);
+  padding: 5rem 0 2.5rem;
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 6vw;
+
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 4rem;
+}
+
+/* Brand */
+
+.footer-brand h3 {
+  font-size: 14px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.footer-brand p {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 320px;
+}
+
+/* Info */
+
+.footer-info h4,
+.footer-social h4 {
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.footer-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-info li {
+  font-size: 13.5px;
+  color: var(--muted);
+  margin-bottom: .75rem;
+}
+
+/* Social */
+
+.social-icons {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.social-icons a {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  border: 1px solid rgba(201,162,77,.35);
+
+  color: var(--text);
+  text-decoration: none;
+
+  font-size: 14px;
+  transition: 
+    border-color .3s ease,
+    box-shadow .3s ease,
+    transform .3s ease;
+}
+
+.social-icons a:hover {
+  border-color: rgba(201,162,77,.8);
+  box-shadow: 0 0 18px rgba(201,162,77,.35);
+  transform: translateY(-2px);
+}
+
+/* Footer bottom */
+
+.footer-bottom {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,.06);
+
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.social-icons svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .footer-brand p {
+    margin: 0 auto;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}
