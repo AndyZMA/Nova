@@ -107,53 +107,114 @@
 			</div>
 		</section>
 
-		<section class="cursos" id="cursos">
-			<div class="cursos-header">
-				<h2>CURSOS</h2>
-				<p style="font-size: 17px">
-					Programas diseñados para expandir el pensamiento crítico, fortalecer
-					bases académicas y conectar disciplinas.
-				</p>
-			</div>
+			<section class="cursos" id="cursos">
+  <header class="cursos-header">
+    <h2>CURSOS</h2>
+    <p>
+      Programas diseñados para expandir el pensamiento crítico,
+      fortalecer bases académicas y conectar disciplinas.
+    </p>
+  </header>
 
-			<div class="cursos-track">
-				<article class="curso-card">
-					<h3>Negociación</h3>
-					<span>Harvard Method</span>
-					<p>
-						Estrategias de negociación basadas en intereses, toma de decisiones
-						y resolución de conflictos.
-					</p>
-				</article>
+  <div class="cursos-wrapper">
+    <!-- Flecha izquierda -->
+    <button class="cursos-arrow prev" aria-label="Anterior">
+      ‹
+    </button>
 
-				<article class="curso-card">
-					<h3>Cálculo Vectorial</h3>
-					<span>Matemáticas Aplicadas</span>
-					<p>
-						Comprensión profunda del espacio, vectores y aplicaciones en física
-						e ingeniería.
-					</p>
-					<a href="temario/calculoVectorial.pdf" target="_blank" class="modalidad-cta">Conoce el temario</a>
-				</article>
+    <!-- Track -->
+    <div class="cursos-track" id="cursosTrack">
 
-				<article class="curso-card">
-					<h3>Química Orgánica</h3>
-					<span>Ciencias Naturales</span>
-					<p>
-						Introducción estructurada a los principios, reacciones y lógica
-						molecular.
-					</p>
-					<a href="temario/calculoVectorial.pdf" target="_blank" class="modalidad-cta">Conoce el temario</a>
+      <article class="curso-card">
+        <h3>Negociación</h3>
+        <span>Harvard Method</span>
+        <p>
+          Estrategias de negociación basadas en intereses, toma de decisiones
+          y resolución de conflictos.
+        </p>
+      </article>
 
-				</article>
-			</div>
+      <article class="curso-card">
+        <h3>Cálculo Vectorial</h3>
+        <span>Matemáticas Aplicadas</span>
+        <p>
+          Comprensión profunda del espacio vectorial y sus aplicaciones
+          en física e ingeniería.
+        </p>
+        <a href="temario/calculoVectorial.pdf" target="_blank" class="modalidad-cta">
+          Conoce el temario
+        </a>
+      </article>
 
-			<!-- Flechas mobile -->
-			<div class="cursos-nav">
-				<button class="prev">←</button>
-				<button class="next">→</button>
-			</div>
-		</section>
+      <article class="curso-card">
+        <h3>Química Orgánica</h3>
+        <span>Ciencias Naturales</span>
+        <p>
+          Estudio de la estructura, propiedades y reacciones de los
+          compuestos orgánicos fundamentales.
+        </p>
+        <a href="temario/quimicaOrganica.pdf" target="_blank" class="modalidad-cta">
+          Conoce el temario
+        </a>
+      </article>
+
+      <article class="curso-card">
+        <h3>Álgebra Lineal</h3>
+        <span>Matemáticas Fundamentales</span>
+        <p>
+          Vectores, matrices, espacios vectoriales y transformaciones
+          lineales aplicadas a ciencia y tecnología.
+        </p>
+        <a href="temario/algebraLineal.pdf" target="_blank" class="modalidad-cta">
+          Conoce el temario
+        </a>
+      </article>
+
+      <article class="curso-card">
+        <h3>Cálculo Diferencial e Integral</h3>
+        <span>Análisis Matemático</span>
+        <p>
+          Estudio del cambio y la acumulación mediante derivadas e integrales
+          en contextos reales.
+        </p>
+        <a href="temario/calculoDI.pdf" target="_blank" class="modalidad-cta">
+          Conoce el temario
+        </a>
+      </article>
+
+      <article class="curso-card">
+        <h3>Ecuaciones Diferenciales</h3>
+        <span>Modelado Matemático</span>
+        <p>
+          Análisis de sistemas dinámicos y fenómenos naturales mediante
+          ecuaciones diferenciales ordinarias.
+        </p>
+        <a href="temario/ecuaciones.pdf" target="_blank" class="modalidad-cta">
+          Conoce el temario
+        </a>
+      </article>
+
+      <article class="curso-card">
+        <h3>Astronomía</h3>
+        <span>Ciencias del Espacio</span>
+        <p>
+          Exploración del universo, cuerpos celestes y herramientas modernas
+          de observación astronómica.
+        </p>
+        <a href="temario/astronomia.pdf" target="_blank" class="modalidad-cta">
+          Conoce el temario
+        </a>
+      </article>
+
+    </div>
+
+    <!-- Flecha derecha -->
+    <button class="cursos-arrow next" aria-label="Siguiente">
+      ›
+    </button>
+  </div>
+</section>
+
 
 		<section class="modalidades-title">
 			<h2>MODALIDADES</h2>
@@ -311,8 +372,6 @@
 			</div>
 		</section>
 
-		
-
 		<section class="contacto" id="contacto">
 			<!-- BACKGROUND -->
 			<div class="contacto-bg"></div>
@@ -427,6 +486,27 @@
 				>
 			</div>
 		</footer>
+		
+		<script>
+  const track = document.getElementById("cursosTrack");
+  const prev = document.querySelector(".cursos-arrow.prev");
+  const next = document.querySelector(".cursos-arrow.next");
+
+  function getScrollAmount() {
+    const card = track.querySelector(".curso-card");
+    const gap = parseInt(getComputedStyle(track).gap) || 0;
+    return card.offsetWidth + gap;
+  }
+
+  prev.addEventListener("click", () => {
+    track.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
+  });
+
+  next.addEventListener("click", () => {
+    track.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
+  });
+</script>
+
 
 		<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
 		<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
