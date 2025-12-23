@@ -1,191 +1,178 @@
+document.addEventListener("DOMContentLoaded", () => {
 
-const burger = document.getElementById("burgerBtn");
-const menu = document.getElementById("mobileMenu");
+  /* ======================================================
+     HEADER – SHOW / HIDE ON SCROLL
+  ====================================================== */
 
-burger.addEventListener("click", () => {
-  burger.classList.toggle("active");
-  menu.classList.toggle("active");
-});
+  const header = document.querySelector(".site-header");
+  let lastScroll = 0;
 
-/* Cerrar al hacer click en un link */
-menu.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    burger.classList.remove("active");
-    menu.classList.remove("active");
-  });
-});
+  if (header) {
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.pageYOffset;
 
-let lastScroll = 0;
-const header = document.querySelector(".site-header");
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        header.classList.add("hide");
+      } else {
+        header.classList.remove("hide");
+      }
 
-window.addEventListener("scroll", () => {
-  const currentScroll = window.scrollY;
-
-  if (currentScroll <= 0) {
-    header.classList.remove("hide");
-    return;
+      lastScroll = currentScroll;
+    });
   }
 
-  if (currentScroll > lastScroll && !header.classList.contains("hide")) {
-    // scroll hacia abajo
-    header.classList.add("hide");
-  } else if (
-    currentScroll < lastScroll &&
-    header.classList.contains("hide")
-  ) {
-    // scroll hacia arriba
-    header.classList.remove("hide");
-  }
+  /* ======================================================
+     BURGER MENU – MOBILE
+  ====================================================== */
 
-  lastScroll = currentScroll;
-});
+  const burger = document.getElementById("burgerBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
 
+  if (burger && mobileMenu) {
+    burger.addEventListener("click", () => {
+      burger.classList.toggle("active");
+      mobileMenu.classList.toggle("active");
+      document.body.classList.toggle("menu-open");
+    });
 
-  gsap.registerPlugin();
-
-  const heroTl = gsap.timeline({
-    defaults: { ease: "power2.out" }
-  });
-
-  heroTl
-    .from(".hero-kicker", {
-      opacity: 0,
-      y: 20,
-      duration: 0.6
-    })
-    .from(".hero-title", {
-      opacity: 0,
-      y: 30,
-      duration: 0.8
-    }, "-=0.3")
-    .from(".hero-sub", {
-      opacity: 0,
-      y: 20,
-      duration: 0.6
-    }, "-=0.4")
-    .from(".hero-cta", {
-      opacity: 0,
-      y: 12,
-      duration: 0.5
-    }, "-=0.3")
-    .from(".hero-visual img", {
-      opacity: 0,
-      x: 60,
-      scale: 0.98,
-      filter: "blur(6px)",
-      duration: 1.2
-    }, "-=0.9");
-
-
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  /* ANIMACIÓN ENTRADA ABOUT */
-  gsap.from(".about-content > *", {
-    scrollTrigger: {
-      trigger: ".about",
-      start: "top 70%"
-    },
-    opacity: 0,
-    y: 24,
-    stagger: 0.12,
-    duration: 0.9,
-    ease: "power2.out"
-  });
-
-  gsap.from(".about-visual img", {
-    scrollTrigger: {
-      trigger: ".about",
-      start: "top 70%"
-    },
-    opacity: 0,
-    x: -40,
-    duration: 1.1,
-    ease: "power2.out"
-  });
-
-  /* CONTENIDO DINÁMICO */
-  const content = {
-    significado: `
-      Nova representa lo nuevo: el nacimiento de una estrella, el inicio de algo distinto.
-      Aethereum remite a lo eterno, al conocimiento que trasciende el tiempo.
-      Nova Aethereum nace de la unión entre lo nuevo y lo perdurable: una academia que se
-      siente ancestral en su respeto por el conocimiento, pero que se manifiesta mediante
-      metodologías, pensamiento y tecnologías contemporáneas.
-    `,
-    mision: `
-      Nuestra misión es transformar la educación mediante experiencias de aprendizaje
-      interdisciplinarias que desarrollen pensamiento crítico, cultura y crecimiento
-      académico, profesional y humano, adaptadas a los desafíos del mundo actual.
-    `,
-    aprendizaje: `
-      Creemos en un aprendizaje continuo, riguroso y humanista, que combina excelencia
-      académica, metodologías experienciales y tecnología educativa para fomentar ciclos
-      permanentes de formación a lo largo de la vida.
-    `
-  };
-
-  const tabs = document.querySelectorAll(".about-tabs .tab");
-  const text = document.getElementById("aboutText");
-
-  tabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      tabs.forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-
-      gsap.to(text, {
-        opacity: 0,
-        y: 10,
-        duration: 0.25,
-        onComplete: () => {
-          text.innerHTML = content[tab.dataset.tab];
-          gsap.fromTo(
-            text,
-            { opacity: 0, y: -10 },
-            { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
-          );
-        }
+    // Cerrar menú al hacer click en un link
+    mobileMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        burger.classList.remove("active");
+        mobileMenu.classList.remove("active");
+        document.body.classList.remove("menu-open");
       });
     });
-  });
+  }
 
-/*MOADALIDADES */
- gsap.registerPlugin(ScrollTrigger);
+  /* ======================================================
+     ABOUT – TABS
+  ====================================================== */
 
-  gsap.utils.toArray(".modalidad-item").forEach((item) => {
-    const direction = item.classList.contains("left") ? -40 : 40;
+ /* ======================================================
+   ABOUT – TABS (FIXED)
+====================================================== */
 
-    gsap.from(item.querySelector(".modalidad-content"), {
-      scrollTrigger: {
-        trigger: item,
-        start: "top 75%",
-      },
-      opacity: 0,
-      x: direction,
-      duration: 0.9,
-      ease: "power2.out"
+const aboutText = document.getElementById("aboutText");
+const aboutTabs = document.querySelectorAll(".about-tabs .tab");
+
+const aboutContent = {
+  significado: `
+    Nova representa lo nuevo: el nacimiento de una estrella, el inicio de algo distinto.
+    Aethereum remite a lo eterno, al conocimiento que trasciende el tiempo.
+    Nova Aethereum nace de la unión entre lo nuevo y lo perdurable.
+  `,
+  mision: `
+    Nuestra misión es formar personas críticas, curiosas y analíticas,
+    mediante experiencias educativas profundas, humanas y rigurosas,
+    que conecten conocimiento, cultura y pensamiento contemporáneo.
+  `,
+  aprendizaje: `
+    Creemos en un aprendizaje interdisciplinario, acompañado y reflexivo,
+    donde el conocimiento no se memoriza: se comprende, se cuestiona
+    y se integra a la vida académica y personal.
+  `
+};
+
+if (aboutTabs.length && aboutText) {
+  aboutTabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      // Quitar active de todos
+      aboutTabs.forEach(t => t.classList.remove("active"));
+
+      // Activar el actual
+      tab.classList.add("active");
+
+      // Cambiar contenido
+      const key = tab.dataset.tab;
+      aboutText.innerHTML = aboutContent[key];
     });
-  });
-
-const track = document.querySelector('.cursos-grid');
-const cards = document.querySelectorAll('.curso-card');
-
-let index = 0;
-
-function scrollToCard(i) {
-  cards[i].scrollIntoView({
-    behavior: 'smooth',
-    inline: 'center'
   });
 }
 
-document.querySelector('.next').addEventListener('click', () => {
-  index = Math.min(index + 1, cards.length - 1);
-  scrollToCard(index);
-});
+  /* ======================================================
+     CURSOS – SLIDER (DESKTOP + MOBILE)
+  ====================================================== */
 
-document.querySelector('.prev').addEventListener('click', () => {
-  index = Math.max(index - 1, 0);
-  scrollToCard(index);
-});
+  const track = document.getElementById("cursosTrack");
+  const prevArrow = document.querySelector(".cursos-arrow.prev");
+  const nextArrow = document.querySelector(".cursos-arrow.next");
 
+  if (track && prevArrow && nextArrow) {
+
+    const getScrollAmount = () => {
+      const card = track.querySelector(".curso-card");
+      return card ? card.offsetWidth + 40 : 0;
+    };
+
+    prevArrow.addEventListener("click", () => {
+      track.scrollBy({
+        left: -getScrollAmount(),
+        behavior: "smooth"
+      });
+    });
+
+    nextArrow.addEventListener("click", () => {
+      track.scrollBy({
+        left: getScrollAmount(),
+        behavior: "smooth"
+      });
+    });
+
+    /* ---- Auto scroll solo desktop ---- */
+
+    let autoScroll;
+
+    const startAutoScroll = () => {
+      if (window.innerWidth > 900) {
+        autoScroll = setInterval(() => {
+          track.scrollBy({
+            left: getScrollAmount(),
+            behavior: "smooth"
+          });
+        }, 4500);
+      }
+    };
+
+    const stopAutoScroll = () => {
+      if (autoScroll) clearInterval(autoScroll);
+    };
+
+    track.addEventListener("mouseenter", stopAutoScroll);
+    track.addEventListener("mouseleave", startAutoScroll);
+
+    window.addEventListener("resize", () => {
+      stopAutoScroll();
+      startAutoScroll();
+    });
+
+    startAutoScroll();
+  }
+
+  /* ======================================================
+     TOUCH / SWIPE SUPPORT (MOBILE)
+  ====================================================== */
+
+  if (track) {
+    let startX = 0;
+    let isDragging = false;
+
+    track.addEventListener("touchstart", e => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    });
+
+    track.addEventListener("touchmove", e => {
+      if (!isDragging) return;
+      const x = e.touches[0].clientX;
+      const walk = startX - x;
+      track.scrollLeft += walk;
+      startX = x;
+    });
+
+    track.addEventListener("touchend", () => {
+      isDragging = false;
+    });
+  }
+
+});
