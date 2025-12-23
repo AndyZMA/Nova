@@ -176,3 +176,26 @@ if (aboutTabs.length && aboutText) {
   }
 
 });
+
+/* =========================
+   SCROLL REVEAL – NOVA
+========================= */
+
+const animatedItems = document.querySelectorAll(".animate");
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.25
+  }
+);
+
+animatedItems.forEach(el => observer.observe(el));
+

@@ -1,0 +1,100 @@
+/* =========================
+   HERO – VIDEO INTEGRADO
+========================= */
+
+.hero-visual {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+
+  /* micro glow académico */
+  filter: drop-shadow(0 0 60px rgba(100,120,255,.06));
+}
+
+/* =========================
+   VIDEO
+========================= */
+
+.hero-visual video {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 1;
+
+  /* Fusión con el fondo */
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0,0,0,1) 60%,
+    rgba(0,0,0,.85) 72%,
+    rgba(0,0,0,.45) 86%,
+    rgba(0,0,0,.15) 94%,
+    rgba(0,0,0,0) 100%
+  );
+
+  mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0,0,0,1) 60%,
+    rgba(0,0,0,.85) 72%,
+    rgba(0,0,0,.45) 86%,
+    rgba(0,0,0,.15) 94%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+/* =========================
+   AURA / NEBULA
+========================= */
+
+.hero-visual::after {
+  content: "";
+  position: absolute;
+  inset: -18%;
+
+  background: radial-gradient(
+    circle,
+    rgba(15,23,51,.35) 0%,
+    rgba(7,11,23,.55) 55%,
+    rgba(0,0,0,.85) 100%
+  );
+
+  filter: blur(32px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* =========================
+   INTEGRACIÓN CON FONDO
+========================= */
+
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(30,40,80,.22),
+    transparent 70%
+  );
+
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* =========================
+   MOBILE AJUSTES
+========================= */
+
+@media (max-width: 768px) {
+  .hero-visual {
+    max-width: 92%;
+  }
+
+  .hero-visual::after {
+    inset: -30%;
+    filter: blur(48px);
+    opacity: .8;
+  }
+}
