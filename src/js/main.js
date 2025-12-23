@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.toggle("menu-open");
     });
 
-    // Cerrar menú al hacer click en un link
     mobileMenu.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         burger.classList.remove("active");
@@ -49,49 +48,41 @@ document.addEventListener("DOMContentLoaded", () => {
      ABOUT – TABS
   ====================================================== */
 
- /* ======================================================
-   ABOUT – TABS (FIXED)
-====================================================== */
+  const aboutText = document.getElementById("aboutText");
+  const aboutTabs = document.querySelectorAll(".about-tabs .tab");
 
-const aboutText = document.getElementById("aboutText");
-const aboutTabs = document.querySelectorAll(".about-tabs .tab");
+  const aboutContent = {
+    significado: `
+      Nova representa lo nuevo: el nacimiento de una estrella, el inicio de algo distinto.
+      Aethereum remite a lo eterno, al conocimiento que trasciende el tiempo.
+      Nova Aethereum nace de la unión entre lo nuevo y lo perdurable.
+    `,
+    mision: `
+      Nuestra misión es formar personas críticas, curiosas y analíticas,
+      mediante experiencias educativas profundas, humanas y rigurosas,
+      que conecten conocimiento, cultura y pensamiento contemporáneo.
+    `,
+    aprendizaje: `
+      Creemos en un aprendizaje interdisciplinario, acompañado y reflexivo,
+      donde el conocimiento no se memoriza: se comprende, se cuestiona
+      y se integra a la vida académica y personal.
+    `
+  };
 
-const aboutContent = {
-  significado: `
-    Nova representa lo nuevo: el nacimiento de una estrella, el inicio de algo distinto.
-    Aethereum remite a lo eterno, al conocimiento que trasciende el tiempo.
-    Nova Aethereum nace de la unión entre lo nuevo y lo perdurable.
-  `,
-  mision: `
-    Nuestra misión es formar personas críticas, curiosas y analíticas,
-    mediante experiencias educativas profundas, humanas y rigurosas,
-    que conecten conocimiento, cultura y pensamiento contemporáneo.
-  `,
-  aprendizaje: `
-    Creemos en un aprendizaje interdisciplinario, acompañado y reflexivo,
-    donde el conocimiento no se memoriza: se comprende, se cuestiona
-    y se integra a la vida académica y personal.
-  `
-};
+  if (aboutTabs.length && aboutText) {
+    aboutTabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        aboutTabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
 
-if (aboutTabs.length && aboutText) {
-  aboutTabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      // Quitar active de todos
-      aboutTabs.forEach(t => t.classList.remove("active"));
-
-      // Activar el actual
-      tab.classList.add("active");
-
-      // Cambiar contenido
-      const key = tab.dataset.tab;
-      aboutText.innerHTML = aboutContent[key];
+        const key = tab.dataset.tab;
+        aboutText.innerHTML = aboutContent[key];
+      });
     });
-  });
-}
+  }
 
   /* ======================================================
-     CURSOS – SLIDER (DESKTOP + MOBILE)
+     CURSOS – SLIDER (MOBILE + DESKTOP)
   ====================================================== */
 
   const track = document.getElementById("cursosTrack");
@@ -102,100 +93,65 @@ if (aboutTabs.length && aboutText) {
 
     const getScrollAmount = () => {
       const card = track.querySelector(".curso-card");
-      return card ? card.offsetWidth + 40 : 0;
+      if (!card) return 0;
+
+      const gap = parseInt(getComputedStyle(track).gap) || 0;
+      const cardsPerView = window.innerWidth > 900 ? 2 : 1;
+
+      return (card.offsetWidth + gap) * cardsPerView;
     };
 
     prevArrow.addEventListener("click", () => {
-      track.scrollBy({
-        left: -getScrollAmount(),
-        behavior: "smooth"
-      });
+      track.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
     });
 
     nextArrow.addEventListener("click", () => {
-      track.scrollBy({
-        left: getScrollAmount(),
-        behavior: "smooth"
-      });
+      track.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
     });
 
-    /* ---- Auto scroll solo desktop ---- */
+    /* ======================================================
+       MOBILE SWIPE (SUAVE)
+    ====================================================== */
 
-    let autoScroll;
+    if (window.innerWidth <= 900) {
+      let startX = 0;
 
-    const startAutoScroll = () => {
-      if (window.innerWidth > 900) {
-        autoScroll = setInterval(() => {
+      track.addEventListener("touchstart", e => {
+        startX = e.touches[0].clientX;
+      });
+
+      track.addEventListener("touchend", e => {
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+
+        if (Math.abs(diff) > 50) {
           track.scrollBy({
-            left: getScrollAmount(),
+            left: diff > 0 ? track.offsetWidth : -track.offsetWidth,
             behavior: "smooth"
           });
-        }, 4500);
-      }
-    };
-
-    const stopAutoScroll = () => {
-      if (autoScroll) clearInterval(autoScroll);
-    };
-
-    track.addEventListener("mouseenter", stopAutoScroll);
-    track.addEventListener("mouseleave", startAutoScroll);
-
-    window.addEventListener("resize", () => {
-      stopAutoScroll();
-      startAutoScroll();
-    });
-
-    startAutoScroll();
+        }
+      });
+    }
   }
 
   /* ======================================================
-     TOUCH / SWIPE SUPPORT (MOBILE)
+     SCROLL REVEAL – FADE
   ====================================================== */
 
-  if (track) {
-    let startX = 0;
-    let isDragging = false;
+  const animatedItems = document.querySelectorAll(".animate");
 
-    track.addEventListener("touchstart", e => {
-      startX = e.touches[0].clientX;
-      isDragging = true;
-    });
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.25 }
+  );
 
-    track.addEventListener("touchmove", e => {
-      if (!isDragging) return;
-      const x = e.touches[0].clientX;
-      const walk = startX - x;
-      track.scrollLeft += walk;
-      startX = x;
-    });
-
-    track.addEventListener("touchend", () => {
-      isDragging = false;
-    });
-  }
+  animatedItems.forEach(el => observer.observe(el));
 
 });
-
-/* =========================
-   SCROLL REVEAL – NOVA
-========================= */
-
-const animatedItems = document.querySelectorAll(".animate");
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  {
-    threshold: 0.25
-  }
-);
-
-animatedItems.forEach(el => observer.observe(el));
-
