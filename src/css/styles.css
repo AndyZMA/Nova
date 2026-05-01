@@ -1600,3 +1600,133 @@ html, body {
   }
 
 }
+/* =========================================
+   SECCIÓN TESTIMONIOS
+   ========================================= */
+
+.testimonials-container {
+  background: radial-gradient(1200px 800px at 20% 50%, #0f1733 0%, #070b17 55%, #000 100%);
+  border-top: 1px solid rgba(201,162,77,.15);
+  padding: 10rem 0;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Título Nova sin máscara de fondo */
+.testimonials-header {
+  text-align: center;
+  margin-bottom: 6rem;
+  padding: 0 6vw;
+  background: none; /* Eliminada la máscara/gradiente de fondo */
+}
+
+.testimonials-header h2 {
+  margin: 0;
+  font-size: clamp(26px, 3vw, 34px);
+  letter-spacing: .32em; /* Estilo Nova[cite: 1] */
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text);
+  position: relative;
+  display: inline-block;
+}
+
+/* Borde dorado inferior exacto */
+.testimonials-header h2::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 1px;
+  margin: 1.25rem auto 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 162, 77, 0.85),
+    transparent
+  );
+}
+
+/* Grid de Cards */
+.testimonials-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 6vw;
+}
+
+/* Estilo de las Cards con Fondo de Estrellas */
+.testimonial-card {
+  position: relative;
+  flex: 1 1 300px;
+  max-width: 380px;
+  padding: 3rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 26px; /* Radio consistente con cursos[cite: 1] */
+  border: 1px solid rgba(201,162,77,.3);
+  transition: all .4s cubic-bezier(.22,1,.36,1);
+  overflow: hidden;
+  
+  background-color: #070b17;
+  background-image: url('https://img.magnific.com/foto-gratis/hermosa-foto-cielo-nocturno-estrellado_181624-11744.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--gold);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+}
+
+/* Máscara interna de la card para legibilidad del texto */
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center, 
+    rgba(7, 11, 23, 0.94) 25%, 
+    rgba(7, 11, 23, 0.7) 75%, 
+    rgba(7, 11, 23, 0.4) 100%
+  );
+  z-index: 1;
+}
+
+.quote-icon, .testimonial-text, .stars {
+  position: relative;
+  z-index: 2;
+}
+
+.quote-icon {
+  font-size: 50px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.testimonial-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+.stars {
+  color: #ffc107;
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .testimonial-card {
+    flex: 0 0 100%;
+    max-width: 520px;
+  }
+}
